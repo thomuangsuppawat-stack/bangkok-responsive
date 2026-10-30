@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วัดอรุณ - oldMyou Tourists</title>
+
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="detail-page">
+
+<!-- navbar -->
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <img decoding="async" src="images/logo.png" alt="oldMyou logo">
+        <span class="brand-text">
+            <span class="blue">old</span><span class="green">M</span><span class="orange">you</span>
+        </span>
+    </a>
+
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Attractions</a></li>
+        <li><a href="detail.html" class="active">Detail</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Blog</a></li>
+    </ul>
+</nav>
+
+<!-- content -->
+<main class="detail">
+
+    <!-- ซ้าย: รูปใหญ่ + รูปเล็ก -->
+    <div class="detail-left">
+        <img decoding="async" class="big-photo" src="images/detail-big.jpg" alt="วัดอรุณ">
+
+        <div class="thumbs">
+            <img decoding="async" class="active" src="images/detail-big.jpg" alt="วัดอรุณ 1">
+            <img decoding="async" src="images/travel-d.jpg" alt="วัดอรุณ 2">
+            <img decoding="async" src="images/travel-b.jpg" alt="วัดอรุณ 3">
+            <img decoding="async" src="images/travel-c.jpg" alt="วัดอรุณ 4">
+        </div>
+
+        <!-- จุดบอกลำดับรูป (แบบ Figma) -->
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <!-- ขวา: ข้อมูล -->
+    <div class="detail-right">
+        <h1>Wat Arun</h1>
+
+        <div class="rating">
+            <span class="rating-label">Rating</span>
+            <span class="stars">★★★★★</span>
+            <span class="rating-person">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+            </span>
+            <span>1.2k</span>
+        </div>
+
+        <!-- กด BTS / MRT / BUS เพื่อเปิดแผนที่ overlay -->
+        <div class="transport">
+            <span>BTS</span>
+            <span>MRT</span>
+            <span>BUS</span>
+        </div>
+
+        <p>
+            วัดอรุณราชวราราม หรือวัดแจ้ง ตั้งอยู่ริมแม่น้ำเจ้าพระยา
+            ฝั่งธนบุรี เป็นวัดที่มีพระปรางค์สูงเด่นเป็นเอกลักษณ์
+            ประดับด้วยกระเบื้องและเปลือกหอยหลากสี
+        </p>
+
+        <p>
+            วิธีเดินทาง: นั่ง MRT ลงสถานีอิสรภาพ แล้วต่อเรือข้ามฟาก
+            หรือนั่งเรือด่วนเจ้าพระยาลงท่าเรือท่าตี๊ก
+            เปิดทุกวัน 08:00 - 18:00 น.
+        </p>
+
+        <p>
+            ที่อยู่: 1415 ถนนเจริญกรุง แขวงสีลม เขตบางรัก กรุงเทพมหานคร
+        </p>
+    </div>
+
+</main>
+
+<!-- lightbox (ดับเบิลคลิกขยายซูมรูป / ซูมเข้า-ออกได้ / เลื่อนซ้ายขวาดูรูปทั้งหมด) -->
+<div class="lightbox" id="photoLightbox">
+    <span class="close" title="ปิด">&times;</span>
+
+    <!-- ปุ่มเลื่อนซ้าย / ขวา ดูรูปทั้งหมด -->
+    <button class="lb-nav lb-prev" type="button" title="รูปก่อนหน้า (ปุ่มลูกศรซ้าย)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <button class="lb-nav lb-next" type="button" title="รูปถัดไป (ปุ่มลูกศรขวา)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+
+    <!-- ตัวนับลำดับรูป (1 / 4) -->
+    <div class="lb-counter"><span id="lbCurrentIndex">1</span> / <span id="lbTotalCount">4</span></div>
+
+    <div class="lightbox-viewport" id="lightboxViewport">
+        <img decoding="async" class="lightbox-img" src="images/detail-big.jpg" alt="Wat Arun">
+    </div>
+
+    <div class="lightbox-controls">
+        <button class="lb-btn lb-zoom-in" type="button" title="ซูมเข้า">+</button>
+        <button class="lb-btn lb-zoom-out" type="button" title="ซูมออก">&minus;</button>
+        <button class="lb-btn lb-reset" type="button" title="ขนาดเดิม">1:1</button>
+    </div>
+    <div class="lightbox-hint">เลื่อนซ้าย-ขวาเพื่อเปลี่ยนรูป &bull; ดับเบิลคลิกเพื่อซูม</div>
+</div>
+
+<!-- map overlay (ดีไซน์การ์ดสีขาวเดิมตาม Figma: ขอบมน ลอยขวา พร้อมปุ่มซูมวงกลม + แผนที่เวกเตอร์คมชัดจาก PDF ไม่แตก) -->
+<div class="map-overlay">
+    <div class="map-panel">
+        <span class="map-close" title="ปิด">&times;</span>
+
+        <!-- viewport สำหรับซูม/ลากแผนที่ -->
+        <div class="map-viewport" id="mapViewport">
+            <div class="map-canvas" id="mapCanvas">
+                <img decoding="async" class="map-image" id="mapImage" src="images/map-vector-sharp.png" alt="แผนที่โครงข่ายระบบขนส่งมวลชนกรุงเทพฯ">
+
+                <!-- จุดบอกตำแหน่งของคุณ (MRT อิสรภาพ / วัดอรุณ - ลบ Your here เก่าออกตามสั่ง) -->
+                <div class="map-user-pin" id="mapUserPin">
+                    <div class="pin-pulse"></div>
+                    <div class="pin-core"></div>
+                    <div class="pin-card">
+                        <span class="pin-title">ตำแหน่งของคุณ</span>
+                        <span class="pin-desc">MRT อิสรภาพ &bull; วัดอรุณราชวราราม</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ตัวเลือกแผนที่สลับสายด้านล่างซ้าย -->
+        <div class="map-subtabs">
+            <button type="button" class="map-subtab active" data-map="ALL">แผนที่รวม</button>
+            <button type="button" class="map-subtab" data-map="BTS">BTS</button>
+            <button type="button" class="map-subtab" data-map="MRT">MRT</button>
+        </div>
+
+        <!-- ปุ่มซูม + / - วงกลมสีขาวมุมขวาล่างตาม Figma -->
+        <div class="map-zoom">
+            <button class="zoom-btn zoom-in" type="button" title="ซูมเข้า">+</button>
+            <button class="zoom-btn zoom-out" type="button" title="ซูมออก">&minus;</button>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    © 2026 oldMyou Tourists - Bangkok
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
+

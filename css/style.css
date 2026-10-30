@@ -1,0 +1,1053 @@
+/* =========================================
+   oldMyou Bangkok Tourists - responsive styles
+   พื้นฐาน: Flexbox + CSS Grid + Media Query
+   ========================================= */
+
+/* ---------- View Transitions & Scrollbar Stabilization ---------- */
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: 100ms cubic-bezier(0.4, 0, 1, 1) both fadeOut;
+}
+::view-transition-new(root) {
+    animation: 150ms cubic-bezier(0, 0, 0.2, 1) both fadeIn;
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
+/* ---------- reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', 'Noto Sans Thai', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ---------- navbar ---------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+    background-color: #121212;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    view-transition-name: main-navbar;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.brand-text {
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.blue { color: #29A6E7; }
+.green { color: #4CC689; }
+.orange { color: #EC693B; }
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+}
+
+.menu a {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 20px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu a:hover,
+.menu a.active {
+    background-color: #F0B41D;
+    color: #121212;
+    font-weight: 600;
+}
+
+/* ---------- hero (หน้า Home) ---------- */
+.hero {
+    min-height: calc(100vh - 68px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75)),
+                      url("../images/hero.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-text {
+    max-width: 900px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 12vw, 145px);
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+    margin-bottom: 16px;
+}
+
+.hero p {
+    font-size: clamp(14px, 2vw, 19px);
+    line-height: 1.7;
+    color: #eeeeee;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #F0B41D;
+    color: #121212;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 15px 45px;
+    border-radius: 26px;
+    box-shadow: 0 4px 14px rgba(240, 180, 29, 0.3);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #f5be2d;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(240, 180, 29, 0.55);
+}
+
+/* ---------- หัวข้อหน้า ---------- */
+.page {
+    flex: 1;
+    padding: 50px 40px 80px;
+    background-color: #000000;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)),
+        url("../images/bg-hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 68px);
+}
+
+.page-title {
+    text-align: center;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    margin-bottom: 26px;
+    text-shadow: 0 4.36px 14.3px rgba(0, 0, 0, 1.0);
+}
+
+/* ---------- tabs (Smart Animate แบบ Figma) ---------- */
+.tabs {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto 40px;
+    flex-wrap: wrap;
+    width: fit-content;
+}
+
+.tab-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    background-color: #333333;
+    border: 1px solid #4a4a4a;
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab {
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: 'Montserrat', 'Noto Sans Thai', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 28px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-align: center;
+    text-shadow: 0 1.34px 4.39px rgba(0, 0, 0, 1.0);
+    transition: color 0.3s ease-out;
+}
+
+.tab:hover,
+.tab.active {
+    color: #F0B41D;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* ---------- gallery grid (Smart Animate fade-in 250ms) ---------- */
+@keyframes panelFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+    animation: panelFadeIn 0.25s ease-out forwards;
+}
+
+/* ตาราง 5 คอลัมน์ 3 แถว ตาม Figma (Frame 9/10/11) */
+.grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1.8fr 0.85fr 0.95fr 1.4fr;
+    grid-template-rows: 200px 205px 210px;
+    grid-template-areas:
+        "a b b f c"
+        "a d e f c"
+        "g h h h c";
+    gap: 16px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* การ์ด: ไม่ขยายตัวการ์ดและไม่ขยายเงาออกไปบังการ์ดอื่น */
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    background-color: #1f1f1f;
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    /* ล็อคขนาดและเงาไว้ในกรอบ ไม่ขยายออกไปบดบังการ์ดข้างเคียง */
+    transform: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
+}
+
+.card:hover img {
+    /* ซูมรูปเบาๆ เฉพาะภายในกรอบการ์ด (overflow: hidden) ไม่ล้นออกนอกกรอบ */
+    transform: scale(1.05);
+    filter: brightness(1.04);
+}
+
+.card-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 60px 14px 14px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.65) 60%, rgba(0, 0, 0, 0) 100%);
+    z-index: 2;
+}
+
+.card-a .card-info,
+.card-c .card-info {
+    padding-top: 90px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.card-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-shadow: 0 1.34px 4.39px rgba(0, 0, 0, 1.0);
+}
+
+.card-info p {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #cccccc;
+    text-shadow: 0 1.34px 4.39px rgba(0, 0, 0, 1.0);
+}
+
+/* ตำแหน่งการ์ดแต่ละใบ (ตาม Figma) */
+.card-a { grid-area: a; }
+.card-b { grid-area: b; }
+.card-c { grid-area: c; }
+.card-d { grid-area: d; }
+.card-e { grid-area: e; }
+.card-f { grid-area: f; }
+.card-g { grid-area: g; }
+.card-h { grid-area: h; }
+
+/* ---------- detail page ---------- */
+/* พื้นหลังหน้า detail: รูปเดียวกับหน้า Home แต่หรี่แสงลง (ตาม Figma) */
+.detail-page {
+    background-color: #000000;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.8)),
+        url("../images/bg-hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.detail {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 50px 40px 80px;
+    width: 100%;
+}
+
+.detail-left {
+    flex: 1.1;
+    min-width: 0;
+}
+
+.big-photo {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    border-radius: 14px;
+    cursor: zoom-in;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-out;
+}
+
+.big-photo:hover {
+    transform: scale(1.01);
+}
+
+.thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.thumbs img {
+    flex: 1;
+    min-width: 0;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+    opacity: 0.65;
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+    transition: opacity 0.3s ease-out, border-color 0.3s ease-out,
+                transform 0.3s ease-out;
+}
+
+.thumbs img:hover,
+.thumbs img.active {
+    opacity: 1;
+    border-color: #F0B41D;
+}
+
+.thumbs img:hover {
+    transform: translateY(-2px);
+}
+
+.detail-right {
+    flex: 1;
+    min-width: 0;
+    padding-top: 6px;
+}
+
+.detail-right h1 {
+    font-size: clamp(34px, 4.5vw, 60px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    text-shadow: 0 4.36px 14.3px rgba(0, 0, 0, 1.0);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #dddddd;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.stars {
+    color: #F0B41D;
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+
+.rating-label {
+    color: #ffffff;
+}
+
+.rating-person {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 6px;
+}
+
+/* จุดบอกลำดับรูป (ตามสัดส่วนเดิม 8px gap 10px) */
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: background-color 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.dot:hover {
+    background-color: #F0B41D;
+}
+
+.dot.active {
+    background-color: #ffffff;
+    transform: scale(1.15);
+}
+
+/* ป้ายการเดินทาง BTS / MRT / BUS ทรง Pill กระทัดรัด พร้อมเงาสไตล์ Figma */
+.transport {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.transport span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 26px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 3.6px 3.6px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.3s ease-out, border-color 0.3s ease-out,
+                color 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.transport span:hover {
+    background-color: #F0B41D;
+    border-color: #F0B41D;
+    color: #121212;
+    text-shadow: none;
+    transform: translateY(-2px);
+}
+
+.detail-right p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #dddddd;
+    margin-bottom: 14px;
+    text-shadow: 0 1.33px 4.37px rgba(0, 0, 0, 1.0);
+}
+
+/* ---------- footer ---------- */
+.footer {
+    background-color: #0a0a0a;
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: #999999;
+    margin-top: auto;
+    width: 100%;
+}
+
+/* =========================================
+   Responsive (มือถือ / แท็บเล็ต)
+   ========================================= */
+
+/* แท็บเล็ตแนวนอน */
+@media (max-width: 1100px) {
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: none;
+        grid-template-areas: none;
+        grid-auto-rows: 220px;
+    }
+    .card-a, .card-b, .card-c, .card-d,
+    .card-e, .card-f, .card-g, .card-h { grid-area: auto; }
+    .card-a { grid-row: span 2; }
+}
+
+/* แท็บเล็ตตั้ง */
+@media (max-width: 820px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px 20px;
+    }
+
+    .page {
+        padding: 36px 20px 60px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 210px;
+    }
+
+    .detail {
+        flex-direction: column;
+        gap: 30px;
+        padding: 36px 20px 60px;
+    }
+
+    .big-photo {
+        height: 320px;
+    }
+}
+
+/* มือถือ */
+@media (max-width: 520px) {
+    .brand-text {
+        font-size: 22px;
+    }
+
+    .menu {
+        gap: 4px;
+    }
+
+    .menu a {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .hero {
+        min-height: calc(100vh - 120px);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-a { grid-row: span 1; }
+
+    .big-photo {
+        height: 240px;
+    }
+
+    .thumbs img {
+        height: 64px;
+    }
+}
+
+/* ---------- map overlay (ดีไซน์การ์ดสีขาวตาม Figma: คมชัดระดับเวกเตอร์จาก PDF ไม่แตก) ---------- */
+.map-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 20px;
+    background-color: rgba(0, 0, 0, 0.58);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.35s;
+}
+
+.map-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.map-panel {
+    position: relative;
+    width: min(720px, 92vw);
+    height: min(490px, 80vh);
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    transform: scale(0.96) translateY(14px);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.map-overlay.open .map-panel {
+    transform: scale(1) translateY(0);
+}
+
+.map-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 25;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    line-height: 1;
+    color: #444444;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.map-close:hover {
+    background: #f0f0f0;
+    color: #000000;
+    transform: scale(1.1);
+}
+
+.map-viewport {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+.map-viewport.dragging {
+    cursor: grabbing;
+}
+
+.map-canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* จุดบอกตำแหน่งของคุณ (MRT อิสรภาพ / ท่าเตียน - ลบ Your here เก่าออกตามที่ระบุ) */
+.map-user-pin {
+    position: absolute;
+    top: 41%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+    z-index: 15;
+}
+
+.pin-pulse {
+    position: absolute;
+    left: -3px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: rgba(24, 119, 242, 0.4);
+    animation: pinPulse 2s infinite ease-out;
+}
+
+@keyframes pinPulse {
+    0% { transform: translateY(-50%) scale(0.7); opacity: 1; }
+    100% { transform: translateY(-50%) scale(2.4); opacity: 0; }
+}
+
+.pin-core {
+    position: relative;
+    z-index: 2;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #1877f2;
+    border: 3px solid #ffffff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.pin-card {
+    background: #ffffff;
+    padding: 5px 12px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
+.pin-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1877f2;
+}
+
+.pin-desc {
+    font-size: 10px;
+    color: #444444;
+}
+
+/* ปุ่มซูม + / - วงกลมสีขาวมุมขวาล่างตาม Figma */
+.map-zoom {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.zoom-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    color: #333333;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.zoom-btn:hover {
+    background: #f7f7f7;
+    transform: scale(1.08);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.25);
+}
+
+.zoom-btn:active {
+    transform: scale(0.95);
+}
+
+/* ปุ่มแท็บสลับสายมุมซ้ายล่าง */
+.map-subtabs {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 20;
+    display: flex;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(4px);
+}
+
+.map-subtab {
+    background: transparent;
+    border: none;
+    border-radius: 16px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555555;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.map-subtab:hover {
+    color: #111111;
+}
+
+.map-subtab.active {
+    background: #1877f2;
+    color: #ffffff;
+}
+
+/* ---------- lightbox (ดับเบิลคลิกซูมขยายรูป / Zoom & Pan) ---------- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.94);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, visibility 0.3s;
+    user-select: none;
+}
+
+.lightbox.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-viewport {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-img {
+    max-width: 90vw;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 14px;
+    transform-origin: center center;
+    transition: transform 0.28s cubic-bezier(0.2, 0, 0.2, 1);
+    cursor: zoom-in;
+}
+
+.lightbox-img.zoomed {
+    cursor: grab;
+}
+
+.lightbox-img.dragging {
+    cursor: grabbing;
+    transition: none;
+}
+
+.lightbox .close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-size: 44px;
+    line-height: 1;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.lightbox .close:hover {
+    color: #F0B41D;
+    transform: scale(1.15);
+}
+
+.lightbox-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+    background: rgba(30, 30, 30, 0.85);
+    padding: 6px 14px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+.lb-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #333333;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.lb-btn:hover {
+    background: #F0B41D;
+    color: #121212;
+    transform: scale(1.08);
+}
+
+.lightbox-hint {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+}
+
+/* ปุ่มเลื่อนซ้าย-ขวา ใน Lightbox */
+.lb-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    transition: all 0.25s ease-out;
+}
+
+.lb-nav:hover {
+    background: #F0B41D;
+    border-color: #F0B41D;
+    color: #121212;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 24px rgba(240, 180, 29, 0.5);
+}
+
+.lb-nav:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.lb-prev {
+    left: 28px;
+}
+
+.lb-next {
+    right: 28px;
+}
+
+.lb-counter {
+    position: absolute;
+    top: 26px;
+    left: 32px;
+    z-index: 10;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    background: rgba(30, 30, 30, 0.75);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+@media (max-width: 520px) {
+    .map-overlay {
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+    }
+
+    .map-panel {
+        width: 94%;
+    }
+
+    .lb-nav {
+        width: 42px;
+        height: 42px;
+    }
+
+    .lb-prev { left: 10px; }
+    .lb-next { right: 10px; }
+    .lb-counter { top: 16px; left: 16px; font-size: 12px; }
+    .lightbox .close { top: 16px; right: 16px; font-size: 34px; }
+}
