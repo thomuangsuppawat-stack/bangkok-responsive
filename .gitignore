@@ -1,0 +1,13 @@
+# Working files / ไฟล์ต้นฉบับที่ไม่ได้ใช้บนเว็บ
+raw/
+raw-extra/
+raw-maps/
+*.orig.jpg
+*.src
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
